@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board-mapper">
+	<select id="getListCount" resultType="_int">
+		select count(*) from board
+		where b_status='Y'
+		and b_collabo='N'
+	</select>
+	
+	<select id="selectBList" resultMap="boardResultSet">
+		select *
+		from (select rownum r, b_no, b_dept, b_title, b_content, b_create_date, 
+			  b_modify_date, b_count, b_type, b_status, b_m_no, b_reply, b_topfixed
+			  from board
+			  where b_status='Y'  and b_collabo='N' and
+			  <if test='bTopFixed == "Y"'>
+			  	b_topfixed = 'Y'	 	
+			  </if>
+			  <if test='bTopFixed == "N"'>
+			  	b_topfixed = 'N'
+			  </if>
+			  order by b_no desc)
+		where r between #{currentPage} + 1 and #{currentPage} + 10
+	</select>
+	
+	<resultMap type="Board" id="boardResultSet">
+		<id column="B_NO" property="bNo"/>
+		<result column="B_DEPT" property="bDept"/>
+		<result column="B_TITLE" property="bTitle"/>
+		<result column="B_CONTENT" property="bContent"/>
+		<result column="B_CREATE_DATE" property="bCreateDate"/>
+		<result column="B_MODIFY_DATE" property="bModifyDate"/>
+		<result column="B_COUNT" property="bCount"/>
+		<result column="B_TYPE" property="bType"/>
+		<result column="B_STATUS" property="bStatus"/>
+		<result column="B_M_NO" property="bMNo"/>
+		<result column="m_name" property="mName"/>
+		<result column="B_REPLY" property="bReply"/>		
+		<result column="B_TOPFIXED" property="bTopFixed"/>		
+	</resultMap>
+	
+	<insert id="insertBoard">
+		insert into board
+		values(bo_seq.nextval, #{bDept}, #{bTitle}, #{bContent}, default, default, default, 
+			   #{bType}, default, #{bMNo}, default,  default, #{bTopFixed})
+	</insert>
+	
+	<select id="selectBNo" resultType="_int">
+		select b_no from
+		(select b_no from board order by b_no desc)
+		where rownum = 1
+	</select>
+	
+	<insert id="insertFile">
+		insert into b_msg_file
+		values(file_seq.nextval, #{fOrigin}, #{fRename}, #{fBNo}, null)
+	</insert>
+	
+	<update id="plusCount">
+		update board
+		set b_count = b_count + 1
+		where b_no = #{bNo}
+	</update>
+	
+	<select id="selectBoard" resultMap="boardResultSet">
+		select b_no, b_dept, b_title, b_content, b_create_date, 
+			   b_modify_date, b_count, b_type, b_status, b_m_no, m_name, b_reply
+		from board join member on (m_no = b_m_no)
+			  where b_status='Y' and b_no = #{bNo}
+	</select>
+	
+	<select id="selectFile" resultMap="fileResultSet">
+		select *
+		from b_msg_file where f_b_no = #{bNo}
+	</select>
+	
+	<resultMap type="BMsgFile" id="fileResultSet">
+		<id column="F_NO" property="fNo"/>
+		<result column="F_ORIGIN" property="fOrigin"/>
+		<result column="F_RENAME" property="fRename"/>
+		<result column="F_B_NO" property="fBNo"/>
+		<result column="F_MSG_NO" property="fMsgNo"/>
+	</resultMap>
+	
+	<update id="updateBoard">
+		update board set b_dept = #{bDept}, b_title = #{bTitle}, b_content = #{bContent},
+					 b_modify_date = default, b_type = #{bType}
+		where b_no = #{bNo}
+	</update>
+	
+	<delete id="deleteFile">
+		delete from b_msg_file where f_rename = #{beforeFile}
+	</delete>
+	
+	<select id="searchBListCount" resultType="_int">
+		select count(*) from board
+		where 
+		<if test="type == '제목'">
+			b_title like '%' || #{search} || '%'
+		</if>
+		<if test="type == '부서'">
+			b_dept like '%' || #{search} || '%'
+		</if>
+		<if test="type == '글 종류'">
+			b_type like '%' || #{search} || '%'
+		</if>
+		and b_status='Y'
+	</select>
+	
+	<select id="searchBList" resultMap="boardResultSet">
+		select *
+		from (select rownum r, b_no, b_dept, b_title, b_content, b_create_date, 
+			  b_modify_date, b_count, b_type, b_status, b_m_no, b_reply, b_topfixed
+			  from board
+			  where b_status='Y' and b_collabo ='N' and b_topfixed = 'N' and
+			  <if test="type == '제목'">
+			  	b_title like '%' || #{search} || '%'
+			  </if>
+			  <if test="type == '부서'">
+				b_dept like '%' || #{search} || '%'
+			  </if>
+			  <if test="type == '글 종류'">
+				b_type like '%' || #{search} || '%'
+			  </if>
+			  order by b_no desc)
+		where r between #{currentPage} + 1 and #{currentPage} + 10
+	</select>
+	
+	<update id="deleteBoard">
+		update board
+		set b_status = 'N'
+		where b_no = #{bNo}
+	</update>
+	
+	<delete id="deleteFileBNo">
+		delete from b_msg_file
+		where f_b_no = #{bNo}
+	</delete>
+	
+	<insert id="insertReply">
+		insert into reply
+		values(re_seq.nextval, #{rContent}, default, default, default, #{rMNo}, #{rBNo}, #{rMRenameProfile})
+	</insert>
+	
+	<select id="selectRList" resultMap="replyResultSet">
+		SELECT * FROM reply JOIN 
+		(MEMBER JOIN job USING(j_code) JOIN DEPARTMENT USING(d_code)) 
+		on(r_m_no = m_no)
+		where r_b_no = #{rBNo} order by r_no desc
+	</select>
+	
+	<resultMap type="Reply" id="replyResultSet">
+		<id column="R_NO" property="rNo"/>
+		<result column="R_CONTENT" property="rContent"/>
+		<result column="R_CREATE_DATE" property="rCreateDate"/>
+		<result column="R_MODIFY_DATE" property="rModifyDate"/>
+		<result column="R_STATUS" property="rStatus"/>
+		<result column="R_M_NO" property="rMNo"/>
+		<result column="R_B_NO" property="rBNo"/>
+		<result column="M_NAME" property="mName"/>
+		<result column="J_NAME" property="jName"/>
+		<result column="D_NAME" property="dName"/>
+		<result column="R_M_RENAMEPROFILE" property="rMRenameProfile"/>
+	</resultMap>
+	
+	<update id="updateCountReply">
+		update board
+		set b_reply = b_reply + 1
+		where b_no = #{rBNo}
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member-mapper">
+	<insert id="insertMembers">
+		insert into member values
+		(mem_seq.nextval, #{mPwd}, #{mName}, #{mGender}, #{mBirthDay}, #{mPhone}, #{mEmail}, #{mAddress}, null, null, 'Y', default, null, null, null, null)
+	</insert>
+	
+	<select id="loginMember" resultMap="memberResultSet">
+		select * 
+			from member
+				left join Job using(j_code)
+        		left join department using(d_code)
+			where M_NO = #{mNo}  
+				and m_status ='Y'
+				and m_admin in(1,0)
+	</select>
+	
+	<resultMap type="Member" id="memberResultSet">
+		<id column="M_NO" property="mNo"/>
+		<result column="M_PWD" property="mPwd"/>
+		<result column="M_NAME" property="mName"/>
+		<result column="M_GENDER" property="mGender"/>
+		<result column="M_BIRTHDAY" property="mBirthDay"/>
+		<result column="M_PHONE" property="mPhone"/>
+		<result column="M_EMAIL" property="mEmail"/>
+		<result column="M_ADDRESS" property="mAddress"/>
+		<result column="M_ENT_DATE" property="mEntDate"/>
+		<result column="M_HIRE_DATE" property="mHireDate"/>
+		<result column="M_STATUS" property="mStatus"/>
+		<result column="M_ADMIN" property="mAdmin"/>
+		<result column="J_CODE" property="jCode"/>
+		<result column="J_NAME" property="jName"/>
+		<result column="D_CODE" property="dCode"/>
+		<result column="D_NAME" property="dName"/>
+		<result column="M_ORIGINPROFILE" property="mOriginProfile"/>
+		<result column="M_RENAMEPROFILE" property="mRenameProfile"/>
+	</resultMap>
+	
+	<select id="selectMno" resultMap="memberResultSet">
+		select * 
+		from member
+		where m_name= #{mName}
+		and m_phone = #{mPhone}
+	</select>
+	
+	<select id="selectMember" resultMap="memberResultSet">
+		select * 
+		from member
+			left join Job using(j_code)
+        	left join department using(d_code)
+		where m_no = #{selectMno}
+	</select>
+	
+<!-- 	<insert id="insertProfile"> -->
+<!-- 		insert into image -->
+<!-- 		values (i_seq.nextval, #{m.iOrigin}, #{m.iChange}, null, default, #{mNo})	 -->
+<!-- 	</insert> -->
+	
+	<update id="updateMember">
+		update member
+			set m_phone = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}, m_originProfile=#{mOriginProfile},m_renameProfile=#{mRenameProfile}
+			where m_no = #{mNo}
+	</update>
+	
+	<update id="updateMemberProfile">
+		update member
+			set m_phone = #{mPhone}, m_email = #{mEmail}, m_address=#{mAddress}
+			where m_no = #{mNo}
+	</update>
+	
+	<update id="updatePwd">
+		update member set m_pwd=#{mPwd} where m_no = #{mNo}
+	</update>
+	
+	<!-- ******************* 관리자페이지  ****************** -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from member
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResultSet">
+		select * 
+		from member
+			left join Job using(j_code)
+        	left join department using(d_code)
+       	order by m_no desc
+	</select>
+	
+	<update id="updateBtnY">
+		update member
+			set M_ENT_DATE =sysdate, M_Admin='1'
+		where m_no = #{mNo}
+	</update>
+	
+	<update id="updateBtnN">
+		update member
+			set M_HIRE_DATE =sysdate, M_STATUS='N'
+		where m_no = #{mNo}
+	</update>
+	
+	<update id="updateDeptJob">
+		update member
+			set d_code = #{dCode} , j_code = #{jCode}
+		where m_no= #{mNo}
+	</update>
+	
+	<select id="selectMemberListBasic" resultMap="memberResultSet">
+		select * 
+		from member
+			left join Job using(j_code)
+        	left join department using(d_code)
+       	order by m_no desc
+	</select>
+	
+	<select id="selectInputName" resultMap="memberResultSet">
+		select * 
+		from member
+			left join Job using(j_code)
+        	left join department using(d_code)
+        where m_name like '%' || #{inputName} || '%'
+       	order by m_no desc
+	</select>
+	
+	
+	
+	
+	<!-- Commute 관련-->
+	<insert id="workStart">
+		insert into commute
+		values(com_seq.nextval, sysdate, sysdate + 9/24, default, default, #{mNo})
+	</insert>
+	
+	<select id="selectTime" resultMap="commuteResultSet">
+	select * from 
+			(select com_no, to_char(com_start, 'HH24:MI') com_start, to_char(com_end, 'HH24:MI') com_end, com_vac, com_status, m_no
+			 from commute 
+			 where m_no=#{mNo} and com_status='Y' and to_char(com_start, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+			 order by com_no desc) 
+		where rownum=1
+	</select>
+	
+	<update id="updateCom">
+		update commute set com_end=sysdate where com_no=#{comNo}
+	</update>
+	
+	<resultMap type="Commute" id="commuteResultSet">
+		<id column="COM_NO" property="comNo"/>
+		<result column="COM_START" property="comStart"/>
+		<result column="COM_END" property="comEnd"/>
+		<result column="COM_VAC" property="comVac"/>
+		<result column="COM_STATUS" property="comStatus"/>
+		<result column="M_NO" property="mNo"/>
+	</resultMap>
+	
+	<select id="selectComList" resultMap="commuteResultSet">
+		select * from (select * 
+						from commute 
+						where m_no=#{mNo} and com_status='Y' 
+						order by com_no desc) 
+		where rownum between 1 and 7
+	</select>
+</mapper>
