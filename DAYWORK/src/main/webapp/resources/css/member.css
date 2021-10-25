@@ -1,0 +1,482 @@
+@charset "UTF-8";
+
+
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+
+	html {font-family: 'Pretendard-Regular'; }
+
+.admin-king{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-top{
+	margin-left: -600px;
+}
+	
+.login-king{
+	width: 380px;
+	margin:auto;
+	margin-top: 150px;
+}
+
+.login-logo{
+	width: 350px;
+	cursor: pointer;
+	margin:auto;
+	text-align: center;
+}
+
+.login-btn{
+	width: 100%;
+	height: 45px;
+	margin-top: 40px;
+	border-style: none;
+	background-color: lightgray;
+	color: white;
+	cursor: pointer;
+}
+
+.loginArea{
+	width: 315px;
+    height: 330px;
+    padding: 20px 30px;
+	margin: auto;
+	border-radius: 7px;
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	margin-top: 5px;
+}
+
+.login-service-btn{
+	border-style: none;
+	background-color: white;
+	border-bottom: 1px solid grey;
+	cursor: pointer;
+}
+
+.login-service{
+	display: flex;
+	justify-content: space-around;
+	padding: 0px 40px;
+}
+
+#inputmNo{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+	margin: 20px 0 10px 0;
+}
+#inputmPwd{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+}
+.login-line{
+	text-align: center;
+	margin: 20px 0;
+	position: relative;
+}
+.login-line-or{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 50px;
+}
+.login-btn.active{
+	width: 100%;
+	height: 45px;
+	margin-top: 40px;
+	border-style: none;
+	background-color: #526ab9;
+	color: white;
+}
+
+/* whereMno & wherePwd*/
+.whereMno-king, .input-wrap{
+	width: 300px;
+	margin:auto;
+	margin-top: 250px;
+}
+
+.whereMnoArea, .wherePwdArea{
+	width: 300px;
+    height: 200px;
+    padding: 20px;
+	margin: auto;
+	border-radius: 7px;
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	margin-top: 10px;
+	display: block;
+	z-index: 1001;
+	padding: 20px;
+}
+
+
+.whereMno-input, .wherePwd-input{
+	display: flex;
+	flex-direction: column;
+}
+
+.whereMnoText, .title{
+	font-size: 25px;
+	width: 300px;
+	margin:auto;
+	text-align: center;
+	margin-bottom: 30px;
+	color:#4e4e4e;
+}
+
+#inputmName, #inputmNo{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+	margin: 20px 0 10px 0;
+}
+#inputmPhone, #inputmEmail{
+	width: 100%;
+	height: 40px;
+	border-style: none;
+	border-bottom: 1px solid gray;
+}
+
+.whereMno-btn, .wherePwd-btn{
+	display: flex;	
+	justify-content: flex-end;
+}
+
+#whereMno-btn{
+	margin-top: 15px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+#wherePwd-btn{
+	margin-top: 15px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 100px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+.mNo-yes{
+	margin:50px 20px;
+	text-align: center;
+}
+
+.mNo-home-btn{
+	margin: 0px 5px 0px 170px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+/* joinMember */
+.joinM-king{
+	width: 800px;
+	margin:auto;
+	margin-top: 80px;
+}
+
+.joinM-logo{
+	font-size: 25px;
+	width: 800px;
+	margin:auto;
+	margin-bottom: 30px;
+	color:#4e4e4e;
+}
+
+.joinM-insert{
+	width: 800px;
+    height: 500px;
+    padding: 40px 60px;
+	margin: auto;
+	border-radius: 7px;
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	margin-top: 5px;
+}
+
+
+.inputBorder, .postcodify_postcode5, .postcodify_address, .postcodify_extra_info{
+	border-style: none;
+    width: 400px;
+    height: 31px;
+    border: 1px solid #dedede;
+    margin: 5px 0px;
+    border-radius: 5px;
+}
+
+table{
+	border-collapse: separate;
+}
+
+th{
+	width:150px;
+	text-align: left;
+}
+
+#postcodify_search_button{
+	border-style: none;
+	width:60px;
+	width: 50px;
+    height: 22px;
+    border-radius: 3px;
+}
+
+.join-btn{
+	margin: 25px 0px 0px 600px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* mypage */
+.mypage-logo{
+	margin: 10px;
+	font-size: 20px;
+}
+
+.readmNo{
+	border-style: none;
+		
+}
+
+.mypage-update{
+	width: 700px;
+    height: 500px;
+    padding: 30px 50px;
+	margin: auto;
+	border-radius: 7px;
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	margin-top: 5px;
+}
+
+.update-btn{
+	margin: 25px 0px 0px 500px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #526ab9;
+    width: 80px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.myProfileImage{
+	width: 100%;
+	height: 50px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+.myProfileImage-size{
+	width: 50px;
+	height: 50px;
+	margin-right: 12px;
+}
+.myProfileImage-text1{
+	display:block;
+	color: lightgrey;
+	font-size:10px;
+}
+
+.myProfileImage-text1.active{
+	display: none;
+}
+
+.myProfileImage-text2{
+	display: none;
+	color: red;
+	font-size:10px;
+	font-style: italic;
+}
+
+.myProfileImage-text2.active{
+	display: block;
+}
+
+/* adminPage */
+
+
+/* .admin-list-btns{ */
+/* 	display: flex; */
+/* 	flex-direction: row; */
+/* 	margin-bottom: 20px; */
+/* 	justify-content: space-between; */
+/* } */
+
+.admin-top-text{
+	font-size:20px;
+	margin-bottom: 20px;
+}
+
+.admin-search{
+	border-radius: 4px;
+    width: 155px;
+    border-style: none;
+    border: 1px solid #00000038;
+    height: 25px;
+    font-size: 12px;
+}
+
+.admin-submit{
+	margin-right: 20px;
+    border: none;
+    background-color: #dedede;
+    width: 150px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+    margin: 0px 0px 10px 587px;
+}
+}
+.admin-list-content{
+	display: flex;
+	flex-direction: column;
+}
+
+.list-th{
+	display: flex;
+	flex-direction: row;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+.list-line{
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.list-td{
+	display: flex;
+	flex-direction: row;
+	font-size: 13px;
+	color: #403f3f;
+}
+
+.th1{
+	width: 30px;
+	text-align: center;
+}
+
+.td1{
+	width: 30px;
+	height: 40px;
+	text-align: center;
+}
+
+.th2, .td2{
+	width: 80px;
+	text-align: center;
+}
+
+.th3, .td3{
+	width: 80px;
+	text-align: center;
+}
+
+.th4, .td4{
+	width: 140px;
+	text-align: center;
+}
+
+.th5, .td5{
+	width: 100px;
+	text-align: center;
+}
+.th6, .td6{
+	width: 120px;
+	text-align: center;
+}
+.th7, .td7{
+	width: 120px;
+	text-align: center;
+}
+
+.th8, .td8{
+	width: 70px;
+	text-align: center;
+}
+
+.td8{
+	color:red;	
+}
+select[name=dCode]{
+	width: 100px;
+	height:20px;
+	border-style: none;
+    box-shadow: 0 0 2px 0px #8d8c8c;
+    border-radius: 2px;
+    text-align: center;
+    color: #403f3f;
+}
+
+select[name=jCode]{
+	width: 80px;
+	height:20px;
+	border-style: none;
+    box-shadow: 0 0 2px 0px #8d8c8c;
+    border-radius: 2px;
+    text-align: center;
+    color: #403f3f;
+}
+
+.welcome{
+	width: 40px;
+    height: 20px;
+    border-radius: 2px;
+    border-style: none;
+    box-shadow: 0px 0px 0px 1.5px #dedede;
+    background-color: white;
+    color: #0a3bdf;
+    cursor: pointer;
+}
+
+.goodbye{
+	width: 40px;
+    height: 20px;
+    border-radius: 2px;
+    border-style: none;
+    background-color: #dc1919;
+    color: white;
+    cursor: pointer;
+}
+
+.fa-search:before {
+    content: "\f002";
+    cursor: pointer;
+/*     position: absolute; */
+/* 	top: 23.5%; */
+/* 	left: 46%; */
+/* 	transform: translate(-50%, -50%); */
+	background-color: white;
+}
+

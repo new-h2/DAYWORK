@@ -1,0 +1,28 @@
+.week-workTime {
+		font-size: 18pt;
+		padding-top: 0.4em;
+	}
+	.week-workTime-title {
+		display:inline-block; 
+		border: 1px solid lightgrey; 
+ 		margin-bottom: 20px;    
+		padding: 0.7em; 
+		border-radius: 5px; 
+		float: right;
+	}
+	.workTime-table{
+		clear: both;
+		border-collapse: collapse;
+		width: 100%;
+			
+	}
+	
+	td, th {
+		border: 1px solid lightgrey;
+		text-align: center;
+		height: 30px;
+	}
+	
+	th {background: lightgrey;}
+	
+	#chart {margin-top: 70px;}

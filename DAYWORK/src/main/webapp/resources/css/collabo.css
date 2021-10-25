@@ -1,0 +1,648 @@
+@charset "UTF-8";
+
+
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+
+	html {font-family: 'Pretendard-Regular'; }
+
+/* ---------- 업무 박스 ------------*/
+
+.collabo-workBox{
+	height: 300px;
+}
+
+.collabo-workBox-top{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.collabo-workBox-top-text{
+	font-weight: bold;
+	margin-right: 530px;
+}
+#workBox-search{
+	border-radius: 8px;
+}
+
+#new{
+	border-style: none;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: white;
+	cursor: pointer;
+}
+
+.collabo-workBox-content{
+	display: flex;
+	flex-direction: column;
+}
+
+.collabo-workBox-btns{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.collabo-workBox-btn{
+	padding: 0px 20px;
+	width: 100px;
+}
+
+
+#call, #progress, #finish, #feedback, #postpone{
+	width: 100px;
+	height: 25px;
+	border-radius: 10px;
+	border-style: none;
+	margin-bottom: 10px;
+}
+
+#call{
+	background-color: pink;
+}
+
+#progress{
+	background-color: orange;
+}
+
+#finish{
+	background-color: dodgerblue;
+}
+
+#feedback{
+	background-color: limegreen;
+}
+
+.collabo-workBox-boxes{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	height: 565px;
+}
+
+.collabo-workBox-box{
+/* 	border:1px solid darkgrey; */
+	box-shadow: 0 0 5px 4px #f2f2f2;
+	padding:20px;
+	font-size: 12px;
+	border-radius: 7px;
+	width:100px;
+	margin-bottom:10px;
+	cursor:pointer;
+	color:#4d4b4b;
+}
+
+.collabo-workBox-box-column{
+	display: flex;
+	flex-direction: column;	
+	width:142px;
+}
+
+.collabo-workBox-box-a{
+	display: flex;
+	flex-direction: row;
+	margin: 3px 0px;
+}
+
+
+/*---------------- 업무요청 글작성 --------------*/
+.collabo-create{
+	display: flex;
+	flex-direction: column;
+	overflow-x:hidden; 
+}
+
+.collabo-create-box{
+	width: 770px;
+	height: 370px;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.collabo-crate-box-top{
+	border-bottom: 1px solid darkgrey;
+	height: 45px;
+    line-height: 45px;
+    background-color: #eeeeee85;
+}
+
+.create-box-top-margin{
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+.collabo-crate-box-bottom{
+	border-top: 1px solid darkgrey;
+}
+
+.create-box-bottom-margin{
+	margin:15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#box-bottom-btn-a, .box-bottom-btn-b{
+	border-color: darkgrey;
+	width: 100px;
+	height: 30px;
+	background-color: white;
+	border-radius: 2px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+
+#box-bottom-btn-a:hover{
+	cursor: pointer;
+	background-color: grey;
+}
+
+#box-bottom-btn-b:hover{
+	cursor: pointer;
+	background-color: black;
+	color: white;
+}
+
+.collabo-crate-box-content{
+	height: 263px;
+	padding: 0px 30px;
+	font-size: 12px;
+}
+
+.create-content-title{
+	border-bottom: 1px solid grey;	
+	padding: 8px 0px;
+}
+
+.new-title, .list-title, .new2-title{
+	width: 700px;
+	border-style: none;
+	font-weight: bold;
+}
+
+
+.create-content-add{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid grey;
+	padding: 8px 0px;
+	font-size: 12px;
+	position: relative;
+}
+
+.b_call, .b_progress, .b_finish, .b_feedback, .b_postpone{
+	width: 60px;
+	height: 25px;
+	border-radius: 10px;
+	border-style: none;
+	margin-right: 5px;
+	font-size:13px;
+}
+
+.b_call:hover{
+	background-color: pink;
+	cursor: pointer;
+}
+
+.b_progress:hover{
+	background-color: orange;
+	cursor: pointer;
+}
+
+.b_finish:hover{
+	background-color: dodgerblue;
+	cursor: pointer;
+}
+
+.b_feedback:hover{
+	background-color: limegreen;
+	cursor: pointer;
+}
+
+.b_postpone:hover{
+	cursor: pointer;
+}
+
+.new-date-s, #up-date-s ,.new2-date-s{
+	margin-right: 10px;
+	border-style: none;
+}
+.new-date-e, #up-date-e, .new2-date-e{
+	margin-right: 20px;
+	border-style: none;
+}
+.list-people, #up-people, .new2-people{
+	border-style: none;
+}
+
+.new-content, #up-content, .new2-content{
+	border-style: none;
+	margin:20px 0px;
+}
+
+.list-content{
+	padding:20px 0px 20px 10px;
+}
+.input-people{
+/* 	width: 200px; */
+}
+.new-people{
+	border-style: none;
+	
+}
+.plus-people{
+	display: inline;	
+}
+
+/*------------ 업무리스트 ------------*/
+.collabo-create{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.collabo-list-box{
+	width: 770px;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	
+}
+
+
+.collabo-list-box-update{
+	width: 770px;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	display: none;
+}
+
+
+.collabo-list-box-top{
+	border-bottom: 1px solid darkgrey;
+	height: 45px;
+    line-height: 45px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-box-top-margin{
+	margin-left: 30px;
+}
+
+.list-box-top-right{
+	display: flex;
+	font-size: 10px;
+	margin-right: 20px;
+}
+
+.box-top-createDate{
+	margin-right: 10px;
+}
+
+.collabo-list-box-bottom{
+	border-top: 1px solid darkgrey;
+}
+
+.list-box-bottom-margin{
+	margin:15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.box-bottom-btn-status{
+	font-size: 15px;
+}
+.box-bottom-btn-update{
+	font-size: 0px;
+}
+
+.box-bottom-fdbk{
+	font-size: 0px;
+}
+
+#box-bottom-btn-a, #box-bottom-btn-b, .box-bottom-btn-up, .box-bottom-fdbk, .box-bottom-btn-end, .box-bottom-btn-de{
+	border-color: darkgrey;
+	width: 100px;
+	height: 30px;
+	background-color: white;
+	border-radius: 2px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+
+#box-bottom-btn-a:hover{
+	cursor: pointer;
+	background-color: grey;
+}
+
+.box-bottom-btn-b:hover,
+.box-bottom-btn-up:hover,
+.box-bottom-btn-end:hover,
+.box-bottom-btn-de:hover{
+	cursor: pointer;
+	background-color: black;
+	color: white;
+}
+
+.collabo-list-box-content{
+	padding: 0px 30px;
+	font-size: 12px;
+}
+
+.list-content-title{
+	border-bottom: 1px solid grey;	
+	padding: 8px 0px;
+}
+
+.list-content-add{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: 1px solid grey;
+	padding: 8px 0px;
+	font-size: 12px;
+}
+
+.list-content-content{
+	margin:30px 0px;
+}
+
+/* .b_call, .b_progress, .b_finish, .b_feedback, .b_postpone{ */
+/* 	width: 60px; */
+/* 	height: 25px; */
+/* 	border-radius: 10px; */
+/* 	border-style: none; */
+/* } */
+
+/* .b_call:hover{ */
+/* 	background-color: pink; */
+/* } */
+
+/* .b_progress:hover{ */
+/* 	background-color: orange; */
+/* } */
+
+/* .b_finish:hover{ */
+/* 	background-color: dodgerblue; */
+/* } */
+
+/* .b_feedback:hover{ */
+/* 	background-color: limegreen; */
+/* } */
+
+#list-add-date-a{
+	margin-right: 10px;
+}
+#list-add-date-b{
+	margin-right: 20px;
+}
+#list-add-people{
+	border: none;
+}
+
+#list-content-style{
+	border:none;
+	margin:20px 0px;
+}
+
+.fa-calendar-check:before, .fa-users:before, .fa-user-check:before{
+	margin-right:2px;
+}
+
+/*------------ selectCate ------------*/
+.collabo-workList-cate{
+	margin-bottom: 5px;
+	margin-right: 400px;
+}
+
+.cateBtn{
+	border:none;
+	border-right: 1px solid black;
+	background: none;
+	font-size: 15px;
+}
+
+.cateBtn:hover{
+	background-color: black;
+	color: white;
+	cursor: pointer;	
+}
+
+#status_its{
+	border-left:  1px solid black;
+}
+
+/*------------ feedback-zone ----------*/
+.feedback-background{
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: .3s;
+    background: rgba(0, 0, 0, 0.06);
+    z-index: 1001;
+    display: none;
+}
+
+.feedback-background.active{
+	opacity:1;
+	display:block;
+}
+
+.feedback-main{
+	width: 600px;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	position:fixed;
+	top:20%;
+	left:40%;
+	transfrom: translate(-80%, -50%);
+	background: #fff;
+	display:none;
+	z-index:1002;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+.feedback-main.active{
+	display: block;
+}
+.feedback-zone{
+	margin-left: 20px;
+}
+
+.feedback-notice{
+	display:flex;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	box-shadow: 0px 2px 5px 4px #f2f2f2;
+    height: 50px;
+   	font-size: 20px;
+   	align-content: space-around;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+}
+.feedback-view{
+	display: flex;
+	flex-direction: column;
+	padding: 30px 0px 40px 15px;
+	overflow: auto;
+    height: 320px;
+}
+
+.feedback-write{
+	margin-bottom: 20px;
+}
+
+.your-feedback{
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+}
+
+.your-feedback-message{
+	display: flex;
+	flex-direction: column;
+	margin-left: 4px;
+	font-size: 12px;
+	align-items: baseline
+}
+
+.my-feedback-message{
+	display: flex;
+	flex-direction: column;
+	margin-right: 4px;
+	align-items: flex-end;
+	font-size: 12px;
+}
+
+.message-who{
+	display: flex;
+	flex-direction: row;
+	font-size: 12px;	
+}
+
+.view-image{
+	width: 50px;
+	height: 50px;
+}
+.view-name{
+	font-weight: bold;
+	margin: 0px 5px;
+}
+
+.your-message-content{
+	background: #b4d0ed80;
+    width: auto;
+    height: auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.my-message-content{
+	background: #edd6b480;
+    width: auto;
+    height: auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.my-feedback{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 10px
+}
+
+.message-date{
+	font-size: 10px;
+}
+
+.input-fContent{
+	border: 1px solid #bcbbbb;
+    border-radius: 5px;
+    width: 450px;
+    height: 30px;
+    margin: 0px 5px 0px 20px;
+}
+
+.feedback-btn{
+	border-radius: 5px;
+    border-style: none;
+    height: 35px;
+    width: 80px;
+    font-size: 13px;
+    background-color: #7ba1da;
+    color: white;
+	cursor: pointer;    
+}
+
+.box-bottom-btn-ab{
+	display: flex;
+	flex-direction: row;
+}
+.feedback-yn{
+	color: red;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.view-image{
+	width: 40px;
+	height: 40px;
+}
+
+/* selectMemberList */
+.selectMemberList{
+	width: 190px;
+    height: 100px;
+    border-radius: 2px;
+    border: 1px solid #aeaeae;
+    position: absolute;
+    top: 103%;
+    left: 60%;
+    overflow: auto;
+    display: none;
+    background-color: white;
+}
+
+.selectMemberList.active{
+	display: block;
+}
+
+.selectMemberList-ajax{
+	display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    height: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.list-padding-box:hover{
+	background: gray;
+}
+
+#plus-box{
+	display: inline;
+}

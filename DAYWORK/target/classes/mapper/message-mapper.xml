@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="message-mapper">
+	<select id="getAllListCount" resultType="_int">
+		select count(*) from message
+		where msg_status='Y' and (msg_receiver_no=#{mNo} or msg_writer_no=#{mNo})
+	</select>
+	
+	<select id="getSendListCount" resultType="_int">
+		select count(*) from message
+		where msg_status='Y' and msg_writer_no=#{mNo}
+	</select>
+	
+	<select id="getReceiveListCount" resultType="_int">
+		select count(*) from message
+		where msg_status='Y' and msg_receiver_no=#{mNo}
+	</select>
+	
+	<select id="selectAllMsgList" resultMap="msgResultSet">
+		select *
+		from (select rownum r, msg_no, msg_title, msg_content, m_name, msg_date, msg_read, msg_writer, msg_sec_no
+			  from message join member on (msg_receiver_no = m_no) 
+			  where msg_status='Y' and (msg_receiver_no=#{mNo} or msg_writer_no=#{mNo})
+			  order by msg_no desc)
+		where r between #{currentPage} + 1 and #{currentPage} + 20
+	</select>
+	
+	<select id="selectSendMsgList" resultMap="msgResultSet">
+		select *
+		from (select rownum r, msg_no, msg_title, msg_content, m_name, msg_date, msg_read, msg_writer, msg_sec_no
+			  from message join member on (msg_receiver_no = m_no) 
+			  where msg_status='Y' and msg_writer_no=#{mNo}
+			  order by msg_no desc)
+		where r between #{currentPage} + 1 and #{currentPage} + 20
+	</select>
+	
+	<select id="selectReceiveMsgList" resultMap="msgResultSet">
+		select *
+		from (select rownum r, msg_no, msg_title, msg_content, m_name, msg_date, msg_read, msg_writer, msg_sec_no
+			  from message join member on (msg_receiver_no = m_no) 
+			  where msg_status='Y' and msg_receiver_no=#{mNo}
+			  order by msg_no desc)
+		where r between #{currentPage} + 1 and #{currentPage} + 20
+	</select>
+	
+	<resultMap type="Message" id="msgResultSet">
+		<id column="msg_no" property="msgNo"/>
+		<result column="msg_title" property="msgTitle"/>
+		<result column="msg_content" property="msgContent"/>
+		<result column="msg_writer" property="msgWriter"/>
+		<result column="m_name" property="msgReceiver"/>
+		<result column="msg_date" property="msgDate"/>
+		<result column="msg_read" property="msgRead"/>
+		<result column="msg_sec_no" property="msgSecNo"/>
+		<result column="msg_writer_no" property="msgWriterMNo"/>
+	</resultMap>
+	
+	<select id="selectMList" resultMap="memberResultSet">
+		select *
+		from member join job using(j_code) join department using(d_code)
+		where m_name like '%' || #{receiver} || '%' 
+		and m_status = 'Y'
+	</select>
+	
+	<resultMap type="Member" id="memberResultSet">
+		<id column="m_no" property="mNo"/>
+		<result column="m_name" property="mName"/>
+		<result column="j_name" property="jName"/>
+		<result column="d_name" property="dName"/>
+	</resultMap>
+	
+	<insert id="insertMsg">
+		insert into message
+		values(msg_seq.nextval, #{msgTitle}, #{msgContent}, default, #{msgWriterMNo}, #{msgReceiverMNo}, 
+			   default, default, #{msgSecNo}, #{msgWriter})
+	</insert>
+	
+	<select id="selectMsgNo" resultType="_int">
+		select msg_no from
+		(select msg_no from message order by msg_no desc)
+		where rownum = 1
+	</select>
+	
+	<insert id="insertFile">
+		insert into b_msg_file
+		values(file_seq.nextval, #{fOrigin}, #{fRename}, null, #{fMsgNo})
+	</insert>
+	
+	<select id="selectMsg" resultMap="msgResultSet">
+		select msg_no, msg_title, msg_content, msg_date, msg_sec_no, msg_writer, m_name, msg_writer_no
+		from message join member on (msg_receiver_no = m_no)
+			  where msg_status='Y' and msg_sec_no = #{msgSecNo}
+	</select>
+	
+	<select id="selectFile" resultMap="fileResultSet">
+		select *
+		from b_msg_file where f_msg_no = #{msgNo}
+	</select>
+	
+	<resultMap type="BMsgFile" id="fileResultSet">
+		<id column="F_NO" property="fNo"/>
+		<result column="F_ORIGIN" property="fOrigin"/>
+		<result column="F_RENAME" property="fRename"/>
+		<result column="F_B_NO" property="fBNo"/>
+		<result column="F_MSG_NO" property="fMsgNo"/>
+	</resultMap>
+	
+	<update id="readMsg">
+		update message set msg_read = 'Y'
+		where msg_no = #{msgNo}
+	</update>
+	
+</mapper>

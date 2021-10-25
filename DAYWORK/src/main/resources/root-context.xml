@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- bean : bean(객체) 생성 / 1. oracle연결 -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+      <property name="username" value="DAYWORK"/>
+      <property name="password" value="DAYWORK"/>
+   </bean>
+	
+	<!-- 2. class:뭘 가져올건지 id:이름 'name="datasource":어떤 데이터 소스를 참조할거지..위에 있는 내용을 쓸겁니다.-> ref: 참조할 id를 써줌 위에 dataSource로 지정함 -->
+	<!-- configLocation: mapper안에서 존재하는 여러 정보들이 같이 쓰이기 때문에 파일 위치설정 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		 								<!-- classpath는 큰resources를 가리킴 -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 3. mybatis를 큰 resouces에 만들아줘야됨 -->
+	
+	<!-- 4. sqlSessionTemplate생성, pom.xml갈 필요 없는 이유는 Spring에서 제공해줌, ref이름은 위 id이름 참고, 순서대로 내려오면서 참조함  -->
+	<!-- constructor-arg: 매개변수있는 생성자를 이용할 때 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<!-- 5. Spring jdbc 검색해서 라이브러리 가져오기 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 파일 업로드를 사용하기 위한 .. -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+      <property name="maxUploadSize" value="100000000"/>
+      <property name="maxInMemorySize" value="100000000"/>
+  	 </bean>
+	
+</beans>

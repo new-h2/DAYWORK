@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Confing 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.kh.DAYWORK.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Collabo" alias="Collabo"/>
+		<typeAlias type="com.kh.DAYWORK.collabo.model.vo.Feedback" alias="Feedback"/>
+		<typeAlias type="com.kh.DAYWORK.calendar.model.vo.Calendar" alias="Calendar"/>
+		<typeAlias type="com.kh.DAYWORK.member.model.vo.Commute" alias="Commute"/>
+		<typeAlias type="com.kh.DAYWORK.address.model.vo.Address" alias="Address"/>
+		<typeAlias alias="Board" type="com.kh.DAYWORK.board.model.vo.Board"/>
+		<typeAlias alias="Reply" type="com.kh.DAYWORK.board.model.vo.Reply"/>
+		<typeAlias alias="BMsgFile" type="com.kh.DAYWORK.common.BMsgFile"/>
+		<typeAlias alias="Message" type="com.kh.DAYWORK.message.model.vo.Message"/>
+		<typeAlias alias="ChatMessage" type="com.kh.DAYWORK.chat.model.vo.ChatMessage"/>
+		<typeAlias alias="ChatRoom" type="com.kh.DAYWORK.chat.model.vo.ChatRoom"/>
+		<typeAlias alias="Approval" type="com.kh.DAYWORK.approval.model.vo.Approval"/>
+		<typeAlias alias="ApprovalForm" type="com.kh.DAYWORK.approval.model.vo.ApprovalForm"/>
+		<typeAlias alias="ApprovalStatus" type="com.kh.DAYWORK.approval.model.vo.ApprovalStatus"/>
+		<typeAlias type="com.kh.DAYWORK.survey.model.vo.Survey" alias="Survey"/>
+		<typeAlias type="com.kh.DAYWORK.survey.model.vo.Question" alias="Question"/>
+		<typeAlias type="com.kh.DAYWORK.survey.model.vo.Answer" alias="Answer"/>
+		
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/address-mapper.xml"/>
+		<mapper resource="mapper/approval-mapper.xml"/>
+		<mapper resource="mapper/calendar-mapper.xml"/>
+		<mapper resource="mapper/chat-mapper.xml"/>
+		<mapper resource="mapper/collabo-mapper.xml"/>
+		<mapper resource="mapper/common-mapper.xml"/>
+		<mapper resource="mapper/member-mapper.xml"/>
+		<mapper resource="mapper/message-mapper.xml"/>
+		<mapper resource="mapper/board-mapper.xml"/>
+		<mapper resource="mapper/servlet-mapper.xml"/>
+		<mapper resource="mapper/survey-mapper.xml"/>
+	</mappers>
+</configuration>
